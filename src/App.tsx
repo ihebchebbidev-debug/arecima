@@ -39,6 +39,7 @@ import CustomersAdmin from "./pages/admin/CustomersAdmin";
 import CustomerDetail from "./pages/admin/CustomerDetail";
 import AnalyticsAdmin from "./pages/admin/AnalyticsAdmin";
 import IntegrationsAdmin from "./pages/admin/IntegrationsAdmin";
+import UsersAdmin from "./pages/admin/UsersAdmin";
 
 const queryClient = new QueryClient({
   defaultOptions: {

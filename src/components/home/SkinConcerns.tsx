@@ -1,37 +1,31 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useApiCategories } from '@/hooks/useApiProducts';
 import concernRadiance from '@/assets/concern-radiance.jpg';
 import concernHydration from '@/assets/concern-hydration.jpg';
 import concernAntiaging from '@/assets/concern-antiaging.jpg';
 import concernSensitive from '@/assets/concern-sensitive.jpg';
 
-const CONCERN_CATEGORY_SLUGS: Record<string, string> = {
-  radiance: 'serums',
-  hydration: 'cremes',
-  antiaging: 'serums',
-  sensitive: 'nettoyants',
+/** Maps concern tiles to the real catalog product pages. */
+const CONCERN_PRODUCT_SLUGS: Record<string, string> = {
+  radiance: 'soleveil-protect-kpf30',
+  hydration: 'silk-shield-spray',
+  antiaging: 'rituel-cheveux-duo',
+  sensitive: 'rituel-cheveux-duo',
 };
 
 const SkinConcerns = () => {
   const { t } = useLanguage();
-  const { categories } = useApiCategories();
 
   const concernImages = [concernRadiance, concernHydration, concernAntiaging, concernSensitive];
   const concernKeys = ['radiance', 'hydration', 'antiaging', 'sensitive'] as const;
 
-  const concerns = useMemo(() => concernKeys.map((key, i) => {
-    const preferredSlug = CONCERN_CATEGORY_SLUGS[key];
-    const category = categories.find(c => c.slug === preferredSlug) || categories[i];
-    return {
-      img: concernImages[i],
-      key,
-      to: category ? `/products?category=${category.slug}` : '/products',
-    };
-  }), [categories]);
+  const concerns = concernKeys.map((key, i) => ({
+    img: concernImages[i],
+    key,
+    to: `/product/${CONCERN_PRODUCT_SLUGS[key]}`,
+  }));
 
   return (
     <section className="container mx-auto px-4 lg:px-8 py-14 lg:py-24">

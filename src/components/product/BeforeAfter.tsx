@@ -12,7 +12,7 @@ const BeforeAfter = () => {
       {/* Single image, revealed via clip — gives an interactive split feel */}
       <img
         src={beforeAfter}
-        alt="Before and after Arecima skincare"
+        alt="Before and after Arecima hair care results"
         className="absolute inset-0 w-full h-full object-cover"
         width={1200}
         height={800}
@@ -32,7 +32,7 @@ const BeforeAfter = () => {
       </div>
       <div className="absolute top-3 right-3 lg:top-4 lg:right-4">
         <span className="font-body text-[9px] lg:text-[10px] tracking-[0.25em] uppercase px-3 py-1.5 bg-gold text-primary-foreground backdrop-blur-sm">
-          {language === 'fr' ? 'Après · 4 semaines' : language === 'ar' ? 'بعد · 4 أسابيع' : 'After · 4 weeks'}
+          {language === 'fr' ? 'Après · 2 semaines' : language === 'ar' ? 'بعد · أسبوعين' : 'After · 2 weeks'}
         </span>
       </div>
 

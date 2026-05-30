@@ -1,17 +1,40 @@
-import { Leaf, HeartHandshake, Beaker, Sprout, Droplets, ShieldCheck } from 'lucide-react';
+import { Leaf, HeartHandshake, Flame, Sun, Droplets, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import type { ProductKind } from '@/data/productDetails';
 
-const ProductAttributes = () => {
+interface ProductAttributesProps {
+  kind?: ProductKind;
+}
+
+const ProductAttributes = ({ kind = 'soleveil' }: ProductAttributesProps) => {
   const { language } = useLanguage();
 
-  const attrs = [
+  const hairAttrs = [
     { icon: Leaf, label: { fr: 'Vegan', en: 'Vegan', ar: 'نباتي' } },
     { icon: HeartHandshake, label: { fr: 'Sans cruauté', en: 'Cruelty-free', ar: 'بدون قسوة' } },
-    { icon: Beaker, label: { fr: 'Dermo-testé', en: 'Dermo-tested', ar: 'مُختبر طبيًا' } },
-    { icon: Sprout, label: { fr: 'Sans parabènes', en: 'Paraben-free', ar: 'خالي من البارابين' } },
-    { icon: Droplets, label: { fr: 'Hypoallergénique', en: 'Hypoallergenic', ar: 'لا يسبب الحساسية' } },
-    { icon: ShieldCheck, label: { fr: 'Made in Tunisia', en: 'Made in Tunisia', ar: 'صُنع في تونس' } },
+    { icon: Flame, label: { fr: '230°C thermoprotect', en: '230°C heat protect', ar: 'حماية 230°م' } },
+    { icon: Sun, label: { fr: 'Made in Tunisia', en: 'Made in Tunisia', ar: 'صُنع في تونس' } },
+    { icon: Droplets, label: { fr: 'Leave-in · sans rinçage', en: 'Leave-in · no rinse', ar: 'بدون شطف' } },
+    { icon: ShieldCheck, label: { fr: 'Tous types de cheveux', en: 'All hair types', ar: 'كل أنواع الشعر' } },
   ];
+
+  const soleveilAttrs = [
+    ...hairAttrs.slice(0, 3),
+    { icon: Sun, label: { fr: 'KPF 30™ UV', en: 'KPF 30™ UV', ar: 'KPF 30™ UV' } },
+    { icon: Droplets, label: { fr: 'Anti-sel & chlore', en: 'Anti-salt & chlorine', ar: 'ضد الملح والكلور' } },
+    hairAttrs[5],
+  ];
+
+  const silkAttrs = [
+    ...hairAttrs.slice(0, 3),
+    { icon: Droplets, label: { fr: 'Anti-humidité', en: 'Anti-humidity', ar: 'ضد الرطوبة' } },
+    { icon: ShieldCheck, label: { fr: 'Thermo-activé', en: 'Heat-activated', ar: 'يُفعَّل بالحرارة' } },
+    hairAttrs[5],
+  ];
+
+  const duoAttrs = hairAttrs;
+
+  const attrs = kind === 'silk-shield' ? silkAttrs : kind === 'duo' ? duoAttrs : soleveilAttrs;
 
   return (
     <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 lg:gap-4 py-5 px-3 lg:px-4 bg-champagne/30 border-y border-border/50 mb-7">

@@ -1,21 +1,19 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import testimonialPortrait from '@/assets/testimonial-portrait.jpg';
+import type { ProductPageMeta } from '@/data/productDetails';
 
-const FeaturedTestimonial = () => {
+interface FeaturedTestimonialProps {
+  testimonial: ProductPageMeta['testimonial'];
+}
+
+const FeaturedTestimonial = ({ testimonial }: FeaturedTestimonialProps) => {
   const { language } = useLanguage();
-
-  const quote = {
-    fr: '"Ce produit a transformé mon rituel matinal. Ma peau n\'a jamais été aussi éclatante — c\'est devenu indispensable."',
-    en: '"This product transformed my morning ritual. My skin has never been so radiant — it\'s become essential."',
-    ar: '"هذا المنتج غيّر طقسي الصباحي. لم تكن بشرتي بهذا الإشراق من قبل — أصبح لا غنى عنه."',
-  };
 
   return (
     <section className="bg-champagne py-14 lg:py-24">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-14 items-center">
-          {/* Portrait */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -35,11 +33,10 @@ const FeaturedTestimonial = () => {
               />
             </div>
             <div className="absolute -bottom-3 -right-3 lg:-bottom-4 lg:-right-4 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gold flex items-center justify-center shadow-luxury">
-              <span className="font-display text-2xl lg:text-3xl text-primary-foreground leading-none">"</span>
+              <span className="font-display text-2xl lg:text-3xl text-primary-foreground leading-none">&ldquo;</span>
             </div>
           </motion.div>
 
-          {/* Quote */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -55,14 +52,15 @@ const FeaturedTestimonial = () => {
               ))}
             </div>
             <blockquote className="font-elegant italic text-xl sm:text-2xl lg:text-3xl text-foreground leading-relaxed mb-6">
-              {quote[language]}
+              {testimonial.quote[language]}
             </blockquote>
             <div className="flex items-center gap-3 justify-center lg:justify-start">
               <span className="h-px w-8 bg-gold" />
               <div>
-                <p className="font-body text-sm font-medium text-foreground">Yasmine B.</p>
+                <p className="font-body text-sm font-medium text-foreground">{testimonial.author}</p>
                 <p className="font-body text-[11px] tracking-wide text-muted-foreground">
-                  {language === 'fr' ? 'Cliente vérifiée · Tunis' : language === 'ar' ? 'عميلة موثقة · تونس' : 'Verified customer · Tunis'}
+                  {language === 'fr' ? 'Cliente vérifiée · ' : language === 'ar' ? 'عميلة موثقة · ' : 'Verified customer · '}
+                  {testimonial.location[language]}
                 </p>
               </div>
             </div>

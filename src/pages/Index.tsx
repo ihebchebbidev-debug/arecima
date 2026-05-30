@@ -42,11 +42,9 @@ const Index = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const routineSteps = [
-    { step: '01', key: 'step1', productSlug: 'gel-nettoyant-doux' },
-    { step: '02', key: 'step2', productSlug: null },
-    { step: '03', key: 'step3', productSlug: 'serum-eclat-vitamine-c' },
-    { step: '04', key: 'step4', productSlug: 'creme-hydratante-nuit' },
-    { step: '05', key: 'step5', productSlug: null },
+    { step: '01', key: 'step1', productSlug: 'soleveil-protect-kpf30' },
+    { step: '02', key: 'step2', productSlug: 'silk-shield-spray' },
+    { step: '03', key: 'step3', productSlug: 'rituel-cheveux-duo' },
   ];
 
   const ingredients = [
@@ -207,7 +205,7 @@ const Index = () => {
       {/* Skincare Routine */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={routineSection} alt="Arecima skincare routine products" className="w-full h-full object-cover" loading="lazy" width={1920} height={900} />
+          <img src={routineSection} alt="Arecima hair ritual — Soleveil Protect and Silk Shield" className="w-full h-full object-cover" loading="lazy" width={1920} height={900} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(12,10,8,0.88) 0%, rgba(12,10,8,0.55) 50%, rgba(12,10,8,0.15) 100%)' }} />
         </div>
         <div className="relative container mx-auto px-4 lg:px-8 py-20 lg:py-32">
@@ -244,7 +242,7 @@ const Index = () => {
               })}
             </div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.7 }} viewport={{ once: true }} className="mt-12">
-              <Link to="/products" className="group inline-flex items-center gap-2 px-8 py-4 font-body text-xs tracking-[0.2em] uppercase bg-gold hover:bg-gold-dark transition-all duration-300" style={{ color: 'hsl(160, 20%, 98%)' }}>
+              <Link to="/product/rituel-cheveux-duo" className="group inline-flex items-center gap-2 px-8 py-4 font-body text-xs tracking-[0.2em] uppercase bg-gold hover:bg-gold-dark transition-all duration-300" style={{ color: 'hsl(160, 20%, 98%)' }}>
                 {t('routine.cta')}
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>

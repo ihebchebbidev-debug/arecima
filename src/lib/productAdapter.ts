@@ -5,18 +5,24 @@
 import type { Product } from '@/data/products';
 import type { BlogPost } from '@/data/blogPosts';
 import { productImages } from '@/data/productImages';
+import { enrichProduct } from '@/data/productDetails';
 
 const placeholder = '/placeholder.svg';
 
+const resolveAssetKey = (value?: string | null): string => {
+  if (!value) return placeholder;
+  if (productImages[value]) return productImages[value];
+  if (/^(https?:|\/|data:)/i.test(value)) return value;
+  return placeholder;
+};
+
 const pickImage = (raw: any): string => {
-  // Backend may return: primary_image (URL), images: [{url, is_primary}], or image_key (legacy)
-  if (raw?.primary_image) return raw.primary_image;
+  if (raw?.primary_image) return resolveAssetKey(raw.primary_image);
   if (Array.isArray(raw?.images) && raw.images.length) {
     const primary = raw.images.find((i: any) => i.is_primary) || raw.images[0];
-    return primary?.url || placeholder;
+    return resolveAssetKey(primary?.url);
   }
-  if (raw?.image && productImages[raw.image]) return productImages[raw.image];
-  if (raw?.image && /^https?:\/\//.test(raw.image)) return raw.image;
+  if (raw?.image) return resolveAssetKey(raw.image);
   return placeholder;
 };
 
@@ -38,18 +44,16 @@ const pickGallery = (raw: any): string[] => {
       if (!a.is_primary && b.is_primary) return 1;
       return (a.sort_order ?? 0) - (b.sort_order ?? 0);
     });
-    return sorted.map((i: any) => i.url).filter(Boolean);
+    return sorted.map((i: any) => resolveAssetKey(i.url)).filter(u => u !== placeholder);
   }
   const single = pickImage(raw);
-  return single ? [single] : [];
+  return single && single !== placeholder ? [single] : [];
 };
 
 export function adaptProduct(raw: any): Product {
   const img = pickImage(raw);
   const gallery = pickGallery(raw);
-  // If we got a URL we don't have in our local map, store the URL directly.
-  // ProductCard / ProductDetail look up via productImages[product.image]; if missing they'd fail, so we keep url-as-key and patch the lookup.
-  return {
+  const product: Product = {
     id: raw.slug || raw.id,
     apiId: String(raw.id),
     images: gallery,
@@ -71,6 +75,7 @@ export function adaptProduct(raw: any): Product {
     howToUse: tri(raw.how_to_use_fr, raw.how_to_use_en, raw.how_to_use_ar),
     benefits: triList(raw.benefits_fr, raw.benefits_en, raw.benefits_ar),
   };
+  return enrichProduct(product);
 }
 
 export function adaptBlogPost(raw: any): BlogPost {

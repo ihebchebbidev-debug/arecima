@@ -605,61 +605,110 @@ VALUES (
   1
 ) ON DUPLICATE KEY UPDATE `is_active` = 1;
 
--- Sample categories
+-- Hair care categories
 INSERT INTO `aurelia_categories` (`id`, `slug`, `name_fr`, `name_en`, `name_ar`, `sort_order`, `is_active`) VALUES
-('e1111111111111111111111111111111', 'serums', 'Sérums', 'Serums', 'سيروم', 1, 1),
-('e2222222222222222222222222222222', 'cremes', 'Crèmes', 'Creams', 'كريمات', 2, 1),
-('e3333333333333333333333333333333', 'nettoyants', 'Nettoyants', 'Cleansers', 'منظفات', 3, 1)
-ON DUPLICATE KEY UPDATE `name_fr` = VALUES(`name_fr`), `is_active` = 1;
+('e1111111111111111111111111111111', 'hair-care', 'Soins Capillaires', 'Hair Care', 'العناية بالشعر', 1, 1),
+('e2222222222222222222222222222222', 'gift-sets', 'Coffrets', 'Gift Sets', 'مجموعات هدايا', 2, 1)
+ON DUPLICATE KEY UPDATE `name_fr` = VALUES(`name_fr`), `name_en` = VALUES(`name_en`), `name_ar` = VALUES(`name_ar`), `is_active` = 1;
 
--- Sample products (for immediate storefront / checkout testing)
+-- Arecima hair catalog (2 singles + 1 duo bundle)
 INSERT INTO `aurelia_products` (
   `id`, `slug`, `sku`, `category_id`, `name_fr`, `name_en`, `name_ar`,
-  `description_fr`, `price`, `original_price`, `stock`, `is_active`, `is_new`, `is_best_seller`
+  `description_fr`, `description_en`, `description_ar`,
+  `ingredients_fr`, `ingredients_en`, `ingredients_ar`,
+  `price`, `original_price`, `stock`, `size`, `rating`, `review_count`,
+  `is_active`, `is_new`, `is_best_seller`
 ) VALUES
 (
   'f1111111111111111111111111111111',
-  'serum-eclat-vitamine-c',
-  'ARE-SERUM-001',
+  'soleveil-protect-kpf30',
+  'ARE-SOL-200',
   'e1111111111111111111111111111111',
-  'Sérum Éclat Vitamine C',
-  'Vitamin C Glow Serum',
-  'سيروم توهج فيتامين سي',
-  'Sérum concentré pour un teint lumineux et unifié. Application matin et soir.',
-  89.000,
-  109.000,
-  50,
+  'Soleveil Protect — KPF 30',
+  'Soleveil Protect — KPF 30',
+  'سولفيل بروتكت — KPF 30',
+  'Écran capillaire sans rinçage · UV + Chaleur + Mer + Chlore (KPF 30™). Crème leave-in qui protège la kératine, la douceur et la brillance.',
+  'Leave-in hair shield · UV + Heat + Sea + Chlorine (KPF 30™). Protects keratin, softness and shine in one step.',
+  'واقٍ للشعر بدون شطف · UV + حرارة + بحر + كلور (KPF 30™). يحمي الكيراتين والنعومة واللمعان.',
+  'Amodimethicone, Polysilicone-29, Quaternium-95, Huile de jojoba, Huile d''avocat, Ethylhexyl Methoxycinnamate, Ethylhexyl Salicylate',
+  'Amodimethicone, Polysilicone-29, Quaternium-95, Jojoba Seed Oil, Avocado Oil, Ethylhexyl Methoxycinnamate, Ethylhexyl Salicylate',
+  'أموديميثيكون، بوليسيليكون-29، كواترنيوم-95، زيت الجوجوبا، زيت الأفوكادو، إيثيل هكسيل ميثوكسي سيناميت، إيثيل هكسيل ساليسيلات',
+  129.000,
+  NULL,
+  80,
+  '200 ml',
+  4.9,
+  412,
   1, 1, 1
 ),
 (
   'f2222222222222222222222222222222',
-  'creme-hydratante-nuit',
-  'ARE-CREME-001',
-  'e2222222222222222222222222222222',
-  'Crème Hydratante Nuit',
-  'Night Hydrating Cream',
-  'كريم ترطيب ليلي',
-  'Texture riche, réparation nocturne pour peaux sèches et sensibles.',
-  75.000,
+  'silk-shield-spray',
+  'ARE-SILK-200',
+  'e1111111111111111111111111111111',
+  'Silk Shield — Spray Anti-Humidité & Thermoprotecteur',
+  'Silk Shield — Anti-Humidity & Anti-Frizz Heat Protect Spray',
+  'سيلك شيلد — بخاخ ضد الرطوبة والهيشان وحماية حرارية',
+  'Spray thermo-activé anti-humidité & anti-frisottis (230°C). Double bouclier pour des cheveux lisses et disciplinés.',
+  'Heat-activated anti-humidity & anti-frizz spray (230°C). Double shield for smooth, long-lasting results.',
+  'بخاخ حراري ضد الرطوبة والهيشان (230°م). درع مزدوج لشعر ناعم ومنضبط.',
+  'PEG-12 Diméthicone, Polysilicone-29, Kératine hydrolysée, Dextran Hydroxypropyltrimonium Chloride, PEG-8',
+  'PEG-12 Dimethicone, Polysilicone-29, Hydrolyzed Keratin, Dextran Hydroxypropyltrimonium Chloride, PEG-8',
+  'PEG-12 ديميثيكون، بوليسيليكون-29، كيراتين متحلل، Dextran Hydroxypropyltrimonium Chloride، PEG-8',
+  69.000,
   NULL,
-  40,
-  1, 0, 1
+  95,
+  '200 ml',
+  4.8,
+  318,
+  1, 1, 1
 ),
 (
   'f3333333333333333333333333333333',
-  'gel-nettoyant-doux',
-  'ARE-NETT-001',
-  'e3333333333333333333333333333333',
-  'Gel Nettoyant Doux',
-  'Gentle Cleansing Gel',
-  'جل تنظيف لطيف',
-  'Nettoie en douceur sans dessécher. Convient à tous types de peau.',
-  45.000,
-  NULL,
+  'rituel-cheveux-duo',
+  'ARE-DUO-SET',
+  'e2222222222222222222222222222222',
+  'Duo Rituel Cheveux — Soleveil Protect + Silk Shield',
+  'Hair Ritual Duo — Soleveil Protect + Silk Shield',
+  'ثنائي طقس الشعر — سولفيل بروتكت + سيلك شيلد',
+  'Le rituel capillaire Arecima complet en coffret signature. Soleveil Protect KPF 30 + Silk Shield 200 ml. Économisez 19 TND.',
+  'The complete Arecima hair ritual in one gift-ready set. Soleveil Protect KPF 30 + Silk Shield 200 ml. Save 19 TND.',
+  'طقس أريسيما الكامل في مجموعة جاهزة للإهداء. سولفيل بروتكت + سيلك شيلد 200 مل. وفّري 19 د.ت.',
+  'Soleveil Protect + Silk Shield — voir fiches produits individuelles.',
+  'Soleveil Protect + Silk Shield — see individual product pages.',
+  'سولفيل بروتكت + سيلك شيلد — راجعي صفحات المنتجات.',
+  179.000,
+  198.000,
   60,
-  1, 1, 0
+  '2 × 200 ml',
+  4.9,
+  264,
+  1, 1, 1
 )
-ON DUPLICATE KEY UPDATE `stock` = VALUES(`stock`), `is_active` = 1;
+ON DUPLICATE KEY UPDATE
+  `slug` = VALUES(`slug`),
+  `category_id` = VALUES(`category_id`),
+  `name_fr` = VALUES(`name_fr`),
+  `name_en` = VALUES(`name_en`),
+  `name_ar` = VALUES(`name_ar`),
+  `description_fr` = VALUES(`description_fr`),
+  `price` = VALUES(`price`),
+  `original_price` = VALUES(`original_price`),
+  `stock` = VALUES(`stock`),
+  `size` = VALUES(`size`),
+  `rating` = VALUES(`rating`),
+  `review_count` = VALUES(`review_count`),
+  `is_active` = 1;
+
+-- Product gallery (asset keys resolved by storefront)
+INSERT INTO `aurelia_product_images` (`id`, `product_id`, `url`, `alt_text`, `sort_order`, `is_primary`) VALUES
+('i1111111111111111111111111111111', 'f1111111111111111111111111111111', 'product-oil', 'Soleveil Protect KPF 30', 0, 1),
+('i1111111111111111111111111111112', 'f1111111111111111111111111111111', 'product-sunscreen', 'Soleveil Protect texture', 1, 0),
+('i2222222222222222222222222222221', 'f2222222222222222222222222222222', 'product-toner', 'Silk Shield spray', 0, 1),
+('i3333333333333333333333333333331', 'f3333333333333333333333333333333', 'product-hair-duo', 'Rituel Cheveux Duo', 0, 1),
+('i3333333333333333333333333333332', 'f3333333333333333333333333333333', 'product-oil', 'Soleveil in Duo', 1, 0),
+('i3333333333333333333333333333333', 'f3333333333333333333333333333333', 'product-toner', 'Silk Shield in Duo', 2, 0)
+ON DUPLICATE KEY UPDATE `url` = VALUES(`url`), `sort_order` = VALUES(`sort_order`), `is_primary` = VALUES(`is_primary`);
 
 -- Sample blog post (draft)
 INSERT INTO `aurelia_blog_posts` (
@@ -675,12 +724,12 @@ INSERT INTO `aurelia_blog_posts` (
   5
 ) ON DUPLICATE KEY UPDATE `title_fr` = VALUES(`title_fr`);
 
--- Sample approved reviews (homepage testimonials)
+-- Sample approved reviews (homepage testimonials + product pages)
 INSERT INTO `aurelia_reviews` (`id`, `product_id`, `customer_name`, `rating`, `title`, `body`, `is_verified`, `is_approved`) VALUES
-('h1111111111111111111111111111111', 'f1111111111111111111111111111111', 'Yasmine B.', 5, 'Éclat visible', 'Le Sérum Éclat Vitamine C a transformé ma peau en deux semaines. Teint plus lumineux et uniforme.', 1, 1),
-('h2222222222222222222222222222222', 'f2222222222222222222222222222222', 'Amira K.', 5, 'Texture luxueuse', 'La Crème Hydratante Nuit est mon produit préféré — texture riche qui pénètre sans laisser de film gras.', 1, 1),
-('h3333333333333333333333333333333', 'f3333333333333333333333333333333', 'Leila M.', 5, 'Douceur au quotidien', 'Le Gel Nettoyant Doux nettoie parfaitement sans irriter ma peau sensible. Toute ma routine est Arecima.', 1, 1)
-ON DUPLICATE KEY UPDATE `is_approved` = 1;
+('h1111111111111111111111111111111', 'f1111111111111111111111111111111', 'Amira K.', 5, 'Indispensable en été', 'Mes cheveux ont survécu à un été tunisien — plage, soleil et lissage quotidien — sans devenir cassants. Soleveil est devenu indispensable.', 1, 1),
+('h2222222222222222222222222222222', 'f2222222222222222222222222222222', 'Leila M.', 5, 'Anti-humidité efficace', 'L''humidité gâchait mon brushing dès midi. Silk Shield garde mes cheveux lisses jusqu''au soir — même en août à Tunis.', 1, 1),
+('h3333333333333333333333333333333', 'f3333333333333333333333333333333', 'Yasmine B.', 5, 'Le Duo parfait', 'J''ai acheté le Duo pour ma sœur et un pour moi. Deux produits, zéro mauvais jour capillaire — le rituel fonctionne vraiment.', 1, 1)
+ON DUPLICATE KEY UPDATE `is_approved` = 1, `body` = VALUES(`body`);
 
 SET FOREIGN_KEY_CHECKS = 1;
 

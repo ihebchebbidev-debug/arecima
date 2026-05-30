@@ -15,6 +15,9 @@ import ProductAttributes from '@/components/product/ProductAttributes';
 import PairItWith from '@/components/product/PairItWith';
 import FeaturedTestimonial from '@/components/product/FeaturedTestimonial';
 import ProductFAQ from '@/components/product/ProductFAQ';
+import { getProductPageMeta } from '@/data/productDetails';
+import ProductHighlights from '@/components/product/ProductHighlights';
+import BundleContents from '@/components/product/BundleContents';
 import BeforeAfter from '@/components/product/BeforeAfter';
 
 const ProductDetail = () => {
@@ -39,9 +42,23 @@ const ProductDetail = () => {
 
   const gallery = useMemo(() => {
     if (!product) return [];
-    const list = (product.images && product.images.length ? product.images : [product.image]).map(resolveImage);
-    return Array.from(new Set(list));
+    const keys = product.images?.length ? product.images : [product.image];
+    return Array.from(new Set(keys.map(resolveImage).filter(Boolean)));
   }, [product]);
+
+  const pageMeta = product ? getProductPageMeta(product.id) : undefined;
+
+  const pairProducts = useMemo(() => {
+    if (!product || !pageMeta) return [];
+    return pageMeta.pairWithSlugs
+      .map(slug => allProducts.find(p => p.id === slug))
+      .filter((p): p is NonNullable<typeof p> => Boolean(p && p.id !== product.id));
+  }, [product, pageMeta, allProducts]);
+
+  const relatedProducts = useMemo(() => {
+    if (pairProducts.length) return pairProducts;
+    return allProducts.filter(p => p.id !== product?.id).slice(0, 2);
+  }, [pairProducts, allProducts, product]);
 
   if (loading) {
     return (
@@ -67,8 +84,6 @@ const ProductDetail = () => {
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
-
-  const relatedProducts = allProducts.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const productSchema = [
     {
@@ -107,6 +122,10 @@ const ProductDetail = () => {
       ]
     }
   ];
+
+  const savingsLabel = pageMeta?.savingsPercent
+    ? (language === 'fr' ? `−${pageMeta.savingsPercent} %` : language === 'ar' ? `خصم ${pageMeta.savingsPercent}%` : `Save ${pageMeta.savingsPercent}%`)
+    : undefined;
 
   return (
     <main className="min-h-screen">
@@ -162,6 +181,11 @@ const ProductDetail = () => {
                 <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-foreground/[0.04]" />
                 {/* Badges */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
+                  {pageMeta?.productType === 'bundle' && (
+                    <span className="font-body text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 bg-gold text-primary-foreground shadow-md">
+                      {language === 'fr' ? 'Coffret' : language === 'ar' ? 'مجموعة' : 'Gift Set'}
+                    </span>
+                  )}
                   {product.isBestSeller && (
                     <span className="font-body text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 bg-charcoal text-champagne shadow-md">Best Seller</span>
                   )}
@@ -194,10 +218,11 @@ const ProductDetail = () => {
                 </div>
               )}
 
-              {/* Before / After interactive slider */}
+              {pageMeta?.showBeforeAfter !== false && (
               <div className="mt-5 lg:mt-6">
                 <BeforeAfter />
               </div>
+              )}
             </div>
           </motion.div>
 
@@ -231,7 +256,13 @@ const ProductDetail = () => {
               )}
             </div>
 
-            <p className="font-body text-[15px] leading-relaxed text-muted-foreground mb-7">{product.shortDescription[language]}</p>
+            <p className="font-body text-[15px] leading-relaxed text-muted-foreground mb-5">{product.shortDescription[language]}</p>
+
+            {pageMeta?.highlights && <ProductHighlights highlights={pageMeta.highlights} />}
+
+            {pageMeta?.productType === 'bundle' && pageMeta && (
+              <BundleContents meta={pageMeta} allProducts={allProducts} savingsLabel={savingsLabel} />
+            )}
 
             {/* Stock & Size */}
             <div className="flex items-center gap-4 mb-6 flex-wrap">
@@ -303,7 +334,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Product Attributes — quick-scan trust icons */}
-            <ProductAttributes />
+            <ProductAttributes kind={pageMeta?.kind} />
 
             {product.benefits[language].length > 0 && (
               <div className="mb-8">
@@ -325,7 +356,7 @@ const ProductDetail = () => {
             )}
 
             {/* Pair it with — cross-sell upsell */}
-            <PairItWith products={relatedProducts.slice(0, 3)} />
+            <PairItWith products={relatedProducts} />
 
             {/* Tabs */}
             <div className="border-t border-border pt-6 mt-2">
@@ -364,11 +395,9 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* Featured pull-quote testimonial */}
-      <FeaturedTestimonial />
+      {pageMeta?.testimonial && <FeaturedTestimonial testimonial={pageMeta.testimonial} />}
 
-      {/* Product-specific FAQ */}
-      <ProductFAQ productName={product.name[language]} />
+      {pageMeta?.faqs && <ProductFAQ faqs={pageMeta.faqs} />}
 
       <div className="container mx-auto px-4 lg:px-8 pb-16 lg:pb-24">
         {/* Related Products */}
@@ -381,9 +410,13 @@ const ProductDetail = () => {
                 <span className="h-px w-10 bg-gold/40" />
               </div>
               <p className="font-body text-[10px] tracking-[0.35em] uppercase text-gold mb-3">{language === 'fr' ? 'À DÉCOUVRIR' : language === 'ar' ? 'اكتشف المزيد' : 'DISCOVER MORE'}</p>
-              <h2 className="font-display text-3xl lg:text-4xl">{t('detail.relatedProducts')}</h2>
+              <h2 className="font-display text-3xl lg:text-4xl">
+                {pageMeta?.productType === 'bundle'
+                  ? (language === 'fr' ? 'Acheter à l\'unité' : language === 'ar' ? 'اشتري منفصلًا' : 'Shop individually')
+                  : t('detail.relatedProducts')}
+              </h2>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 max-w-4xl mx-auto">
               {relatedProducts.map((p, i) => (
                 <ProductCard key={p.id} product={p} index={i} />
               ))}
