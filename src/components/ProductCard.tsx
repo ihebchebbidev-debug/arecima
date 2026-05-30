@@ -30,7 +30,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
       <Link to={`/product/${product.id}`} className="block">
         <div className="relative overflow-hidden bg-gradient-to-br from-champagne/40 via-secondary/30 to-champagne/20 aspect-[3/4] mb-4 rounded-sm">
           <img
-            src={resolveImage(product.image)}
+            src={resolveImage(product.image, product.id)}
             alt={product.name[language]}
             className="w-full h-full object-cover transition-all duration-[900ms] ease-out group-hover:scale-110"
             loading="lazy"

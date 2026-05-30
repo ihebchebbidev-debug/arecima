@@ -109,6 +109,15 @@ const IntegrationsAdmin = () => {
         </p>
       </div>
 
+      <div className="rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-900 px-4 py-3 text-sm text-amber-900 dark:text-amber-100">
+        <p className="font-medium">Statut boutique</p>
+        <p className="text-xs mt-1 opacity-90">
+          {pixel.enabled && pixelValid
+            ? 'Après enregistrement, le pixel charge sur arecima.tn et envoie PageView, ViewContent, AddToCart, InitiateCheckout, Purchase et AddToWishlist.'
+            : 'Le pixel est désactivé côté boutique tant que vous ne l\'activez pas et n\'enregistrez pas un Pixel ID valide.'}
+        </p>
+      </div>
+
       <div className="rounded-lg border border-border bg-card overflow-hidden">
         <div className="flex items-center gap-3 px-5 py-4 border-b border-border bg-muted/30">
           <div className="h-10 w-10 rounded-lg bg-[#1877F2]/10 flex items-center justify-center">

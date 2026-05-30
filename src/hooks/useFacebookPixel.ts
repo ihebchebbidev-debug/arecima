@@ -11,39 +11,24 @@ export const useFacebookPixel = () => {
   const readyRef = useRef(false);
   const lastPathRef = useRef('');
 
+  const firePageViewIfReady = (path: string) => {
+    if (path === lastPathRef.current) return;
+    trackPageView();
+    lastPathRef.current = path;
+  };
+
   useEffect(() => {
     if (location.pathname.startsWith('/admin')) return;
 
     let cancelled = false;
+    const path = location.pathname + location.search;
 
     bootstrapFacebookPixel().then(ok => {
       if (cancelled || !ok) return;
       readyRef.current = true;
-      const path = location.pathname + location.search;
-      trackPageView();
-      lastPathRef.current = path;
+      firePageViewIfReady(path);
     });
 
     return () => { cancelled = true; };
-  }, []);
-
-  useEffect(() => {
-    if (location.pathname.startsWith('/admin')) return;
-
-    const path = location.pathname + location.search;
-    if (path === lastPathRef.current) return;
-
-    if (!readyRef.current) {
-      bootstrapFacebookPixel().then(ok => {
-        if (!ok) return;
-        readyRef.current = true;
-        trackPageView();
-        lastPathRef.current = path;
-      });
-      return;
-    }
-
-    lastPathRef.current = path;
-    trackPageView();
   }, [location.pathname, location.search]);
 };

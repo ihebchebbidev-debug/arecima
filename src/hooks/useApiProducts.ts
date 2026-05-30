@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { adaptProduct, adaptBlogPost } from '@/lib/productAdapter';
+import { mergeStorefrontProducts, getStorefrontProductBySlug } from '@/lib/storefrontCatalog';
 import type { Product } from '@/data/products';
 import type { BlogPost } from '@/data/blogPosts';
 
@@ -55,10 +56,11 @@ export function useApiProducts(query?: Record<string, unknown>) {
     api.listProducts({ limit: 100, is_active: 1, ...query }).then(res => {
       if (cancelled) return;
       if (res.success && Array.isArray(res.data)) {
-        setData(res.data.map(adaptProduct));
+        const apiProducts = res.data.map(adaptProduct);
+        setData(mergeStorefrontProducts(apiProducts));
       } else {
         setError(res.error || 'Failed to load products');
-        setData([]);
+        setData(mergeStorefrontProducts([]));
       }
       setLoading(false);
     });
@@ -81,8 +83,11 @@ export function useApiProduct(slug?: string) {
 
     api.getProductBySlug(slug).then(res => {
       if (cancelled) return;
-      if (res.success && res.data) {
-        setProduct(adaptProduct(res.data));
+      const apiProduct = res.success && res.data ? adaptProduct(res.data) : null;
+      const merged = getStorefrontProductBySlug(slug, apiProduct);
+      if (merged) {
+        setProduct(merged);
+        setError(null);
       } else {
         setProduct(null);
         setError(res.error || 'Product not found');

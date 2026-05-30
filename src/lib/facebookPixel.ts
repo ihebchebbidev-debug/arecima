@@ -142,7 +142,7 @@ function getEventFlag(event: string): keyof FacebookPixelConfig {
 }
 
 /** Fetch config from API, load script, init pixel — safe to call multiple times. */
-export async function bootstrapFacebookPixel(): Promise<boolean> {
+export async function bootstrapFacebookPixel(retry = true): Promise<boolean> {
   if (typeof window === 'undefined') return false;
   if (initializedPixelId && config?.enabled) return true;
 
@@ -151,6 +151,12 @@ export async function bootstrapFacebookPixel(): Promise<boolean> {
       try {
         const res = await api.getTrackingConfig();
         if (!res.success || !res.data?.enabled || !res.data.pixel_id) {
+          config = res.data?.enabled === false ? { enabled: false } : config;
+          if (!res.success && retry) {
+            await new Promise(r => setTimeout(r, 1500));
+            bootstrapPromise = null;
+            return bootstrapFacebookPixel(false);
+          }
           config = { enabled: false };
           return false;
         }
@@ -171,6 +177,11 @@ export async function bootstrapFacebookPixel(): Promise<boolean> {
         flushPendingEvents();
         return true;
       } catch {
+        if (retry) {
+          await new Promise(r => setTimeout(r, 1500));
+          bootstrapPromise = null;
+          return bootstrapFacebookPixel(false);
+        }
         return false;
       } finally {
         bootstrapPromise = null;

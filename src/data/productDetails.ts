@@ -1,4 +1,5 @@
 import type { Product } from '@/data/products';
+import { defaultProductImageKey } from '@/data/productImages';
 
 export type ProductKind = 'soleveil' | 'silk-shield' | 'duo';
 
@@ -344,12 +345,14 @@ export function getProductPageMeta(slug: string): ProductPageMeta | undefined {
 
 export function enrichProduct(product: Product): Product {
   const catalog = CATALOG_PRODUCTS[product.id];
-  if (!catalog) return product;
+  if (!catalog) {
+    return applyBundledImageKeys(product);
+  }
 
   const meta = PRODUCT_PAGE_META[product.id];
   const imageKey = meta?.imageKey || catalog.image;
 
-  return {
+  return applyBundledImageKeys({
     ...catalog,
     ...product,
     id: product.id,
@@ -375,6 +378,17 @@ export function enrichProduct(product: Product): Product {
     category: product.category || catalog.category,
     image: imageKey,
     images: meta?.galleryKeys || catalog.images,
+  });
+}
+
+
+function applyBundledImageKeys(product: Product): Product {
+  const key = defaultProductImageKey(product.id);
+  if (!key) return product;
+  return {
+    ...product,
+    image: key,
+    images: [key],
   };
 }
 
