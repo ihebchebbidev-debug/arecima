@@ -1,0 +1,31 @@
+# Arecima — robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /cart
+Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Disallow noisy AI crawlers if you don't want them training on your content (optional)
+# User-agent: GPTBot
+# Disallow: /
+
+Sitemap: https://arecima.tn/sitemap.xml
+Host: https://arecima.tn
