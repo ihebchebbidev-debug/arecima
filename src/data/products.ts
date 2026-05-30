@@ -41,7 +41,7 @@ export const products: Product[] = [
       ar: 'واقٍ للشعر بدون شطف · UV + حرارة + بحر + كلور (KPF 30™)'
     },
     price: 129,
-    image: 'product-oil',
+    image: 'soleveil-protect-kpf30',
     category: 'hair-care',
     rating: 4.9,
     reviewCount: 412,
@@ -83,7 +83,7 @@ export const products: Product[] = [
       ar: 'بخاخ حراري ضد الرطوبة والهيشان (230°م)'
     },
     price: 69,
-    image: 'product-toner',
+    image: 'silk-shield-spray',
     category: 'hair-care',
     rating: 4.8,
     reviewCount: 318,
@@ -126,7 +126,7 @@ export const products: Product[] = [
     },
     price: 179,
     originalPrice: 198,
-    image: 'product-hair-duo',
+    image: 'rituel-cheveux-duo',
     category: 'hair-care',
     rating: 4.9,
     reviewCount: 264,

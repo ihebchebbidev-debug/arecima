@@ -1,21 +1,34 @@
-import productSerum from '@/assets/product-serum.jpg';
-import productCream from '@/assets/product-cream.jpg';
-import productCleanser from '@/assets/product-cleanser.jpg';
-import productOil from '@/assets/product-oil.jpg';
-import productEyeCream from '@/assets/product-eye-cream.jpg';
-import productMask from '@/assets/product-mask.jpg';
-import productToner from '@/assets/product-toner.jpg';
-import productSunscreen from '@/assets/product-sunscreen.jpg';
-import productHairDuo from '@/assets/product-hair-duo.jpg';
+/**
+ * Bundled product photos — served from the frontend build, no server upload required.
+ * Keys match product slugs (and legacy DB asset keys for backward compatibility).
+ */
+import soleveilProtect from '@/assets/soleveil-protect.jpg';
+import silkShield from '@/assets/silk-shield.jpg';
+import rituelCheveuxDuo from '@/assets/rituel-cheveux-duo.jpg';
+
+export const PRODUCT_IMAGE_KEYS = {
+  soleveil: 'soleveil-protect-kpf30',
+  silkShield: 'silk-shield-spray',
+  duo: 'rituel-cheveux-duo',
+} as const;
 
 export const productImages: Record<string, string> = {
-  'product-serum': productSerum,
-  'product-cream': productCream,
-  'product-cleanser': productCleanser,
-  'product-oil': productOil,
-  'product-eye-cream': productEyeCream,
-  'product-mask': productMask,
-  'product-toner': productToner,
-  'product-sunscreen': productSunscreen,
-  'product-hair-duo': productHairDuo,
+  [PRODUCT_IMAGE_KEYS.soleveil]: soleveilProtect,
+  [PRODUCT_IMAGE_KEYS.silkShield]: silkShield,
+  [PRODUCT_IMAGE_KEYS.duo]: rituelCheveuxDuo,
+  // Legacy DB keys (still resolve to bundled assets)
+  'product-oil': soleveilProtect,
+  'product-toner': silkShield,
+  'product-hair-duo': rituelCheveuxDuo,
+};
+
+/** Default image key per catalog slug. */
+export const defaultProductImageKey = (slug: string): string | undefined => {
+  if (slug in productImages) return slug;
+  const map: Record<string, string> = {
+    'soleveil-protect-kpf30': PRODUCT_IMAGE_KEYS.soleveil,
+    'silk-shield-spray': PRODUCT_IMAGE_KEYS.silkShield,
+    'rituel-cheveux-duo': PRODUCT_IMAGE_KEYS.duo,
+  };
+  return map[slug];
 };

@@ -700,14 +700,11 @@ ON DUPLICATE KEY UPDATE
   `review_count` = VALUES(`review_count`),
   `is_active` = 1;
 
--- Product gallery (asset keys resolved by storefront)
+-- Product gallery (bundled asset keys — resolved by storefront, no upload required)
 INSERT INTO `aurelia_product_images` (`id`, `product_id`, `url`, `alt_text`, `sort_order`, `is_primary`) VALUES
-('i1111111111111111111111111111111', 'f1111111111111111111111111111111', 'product-oil', 'Soleveil Protect KPF 30', 0, 1),
-('i1111111111111111111111111111112', 'f1111111111111111111111111111111', 'product-sunscreen', 'Soleveil Protect texture', 1, 0),
-('i2222222222222222222222222222221', 'f2222222222222222222222222222222', 'product-toner', 'Silk Shield spray', 0, 1),
-('i3333333333333333333333333333331', 'f3333333333333333333333333333333', 'product-hair-duo', 'Rituel Cheveux Duo', 0, 1),
-('i3333333333333333333333333333332', 'f3333333333333333333333333333333', 'product-oil', 'Soleveil in Duo', 1, 0),
-('i3333333333333333333333333333333', 'f3333333333333333333333333333333', 'product-toner', 'Silk Shield in Duo', 2, 0)
+('i1111111111111111111111111111111', 'f1111111111111111111111111111111', 'soleveil-protect-kpf30', 'Soleveil Protect KPF 30', 0, 1),
+('i2222222222222222222222222222221', 'f2222222222222222222222222222222', 'silk-shield-spray', 'Silk Shield spray', 0, 1),
+('i3333333333333333333333333333331', 'f3333333333333333333333333333333', 'rituel-cheveux-duo', 'Rituel Cheveux Duo', 0, 1)
 ON DUPLICATE KEY UPDATE `url` = VALUES(`url`), `sort_order` = VALUES(`sort_order`), `is_primary` = VALUES(`is_primary`);
 
 -- Sample blog post (draft)

@@ -4,26 +4,35 @@
 // This lets us swap the data source without rewriting every component.
 import type { Product } from '@/data/products';
 import type { BlogPost } from '@/data/blogPosts';
-import { productImages } from '@/data/productImages';
+import { productImages, defaultProductImageKey } from '@/data/productImages';
 import { enrichProduct } from '@/data/productDetails';
 
 const placeholder = '/placeholder.svg';
 
-const resolveAssetKey = (value?: string | null): string => {
+const resolveAssetKey = (value?: string | null, slug?: string): string => {
+  if (!value && slug) {
+    const fallback = defaultProductImageKey(slug);
+    if (fallback && productImages[fallback]) return productImages[fallback];
+  }
   if (!value) return placeholder;
   if (productImages[value]) return productImages[value];
   if (/^(https?:|\/|data:)/i.test(value)) return value;
+  if (slug) {
+    const fallback = defaultProductImageKey(slug);
+    if (fallback && productImages[fallback]) return productImages[fallback];
+  }
   return placeholder;
 };
 
 const pickImage = (raw: any): string => {
-  if (raw?.primary_image) return resolveAssetKey(raw.primary_image);
+  const slug = raw.slug || raw.id;
+  if (raw?.primary_image) return resolveAssetKey(raw.primary_image, slug);
   if (Array.isArray(raw?.images) && raw.images.length) {
     const primary = raw.images.find((i: any) => i.is_primary) || raw.images[0];
-    return resolveAssetKey(primary?.url);
+    return resolveAssetKey(primary?.url, slug);
   }
-  if (raw?.image) return resolveAssetKey(raw.image);
-  return placeholder;
+  if (raw?.image) return resolveAssetKey(raw.image, slug);
+  return resolveAssetKey(null, slug);
 };
 
 const tri = (fr?: string | null, en?: string | null, ar?: string | null) => ({
@@ -38,13 +47,15 @@ const triList = (fr?: string | null, en?: string | null, ar?: string | null): { 
 };
 
 const pickGallery = (raw: any): string[] => {
+  const slug = raw.slug || raw.id;
   if (Array.isArray(raw?.images) && raw.images.length) {
     const sorted = [...raw.images].sort((a: any, b: any) => {
       if (a.is_primary && !b.is_primary) return -1;
       if (!a.is_primary && b.is_primary) return 1;
       return (a.sort_order ?? 0) - (b.sort_order ?? 0);
     });
-    return sorted.map((i: any) => resolveAssetKey(i.url)).filter(u => u !== placeholder);
+    const urls = sorted.map((i: any) => resolveAssetKey(i.url, slug)).filter(u => u !== placeholder);
+    if (urls.length) return urls;
   }
   const single = pickImage(raw);
   return single && single !== placeholder ? [single] : [];
@@ -94,10 +105,15 @@ export function adaptBlogPost(raw: any): BlogPost {
 // Resolves an image key OR raw URL to a usable src for <img>.
 // Existing code does `productImages[product.image]` — for API products that
 // returns undefined, so callers should use this helper instead.
-export function resolveImage(key: string): string {
-  if (!key) return placeholder;
+export function resolveImage(key: string, slug?: string): string {
+  if (!key) {
+    const fallback = slug ? defaultProductImageKey(slug) : undefined;
+    return fallback && productImages[fallback] ? productImages[fallback] : placeholder;
+  }
   if (/^(https?:|\/|data:)/i.test(key)) return key;
-  return productImages[key] || placeholder;
+  if (productImages[key]) return productImages[key];
+  const fallback = slug ? defaultProductImageKey(slug) : undefined;
+  return fallback && productImages[fallback] ? productImages[fallback] : placeholder;
 }
 
 /** MySQL id for orders API (never use slug here). */

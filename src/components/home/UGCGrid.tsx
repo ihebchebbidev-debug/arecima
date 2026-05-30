@@ -5,15 +5,15 @@ import ugc1 from '@/assets/ugc-1.jpg';
 import ugc2 from '@/assets/ugc-2.jpg';
 import ugc3 from '@/assets/ugc-3.jpg';
 import ugc4 from '@/assets/ugc-4.jpg';
-import productSerum from '@/assets/product-serum.jpg';
-import productCream from '@/assets/product-cream.jpg';
+import soleveilProtect from '@/assets/soleveil-protect.jpg';
+import silkShield from '@/assets/silk-shield.jpg';
 
 const INSTAGRAM_URL = 'https://instagram.com/arecima.tn';
 
 const UGCGrid = () => {
   const { t } = useLanguage();
 
-  const posts = [ugc1, ugc2, ugc3, ugc4, productSerum, productCream];
+  const posts = [ugc1, ugc2, ugc3, ugc4, soleveilProtect, silkShield];
 
   return (
     <section className="bg-champagne py-14 lg:py-20">

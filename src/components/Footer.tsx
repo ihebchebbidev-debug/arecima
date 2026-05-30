@@ -38,9 +38,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="mb-4">
-              <img src={arecimaLogoWhite} alt="Arecima" className="h-14 w-auto object-contain" width={240} height={120} loading="lazy" />
-            </div>
+            <Link to="/" className="inline-block mb-4 bg-transparent" aria-label="Arecima — Home">
+              <img
+                src={arecimaLogoWhite}
+                alt="Arecima"
+                className="h-12 sm:h-14 w-auto max-w-[220px] object-contain object-left bg-transparent"
+                width={220}
+                height={80}
+                loading="lazy"
+                decoding="async"
+              />
+            </Link>
             <p className="font-body text-sm leading-relaxed opacity-70">
               {t('footer.aboutText')}
             </p>
