@@ -1,35 +1,51 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SITE_URL } from '@/lib/site';
+import {
+  OG_IMAGE,
+  absoluteUrl,
+  formatPageTitle,
+  getDefaultSeoDescription,
+  getSeoKeywords,
+  type SeoLang,
+} from '@/lib/seo';
 
 interface SEOHeadProps {
   title?: string;
   description?: string;
+  keywords?: string;
   type?: string;
   image?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  /** Override canonical path (include query string if needed, e.g. /products?category=hair-care) */
+  canonicalPath?: string;
 }
 
-import { SITE_URL } from '@/lib/site';
-
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
-
-const SEOHead = ({ title, description, type = 'website', image, schema, noindex = false }: SEOHeadProps) => {
+const SEOHead = ({
+  title,
+  description,
+  keywords,
+  type = 'website',
+  image,
+  schema,
+  noindex = false,
+  canonicalPath,
+}: SEOHeadProps) => {
   const { language } = useLanguage();
   const location = useLocation();
+  const lang = (language === 'ar' ? 'ar' : language === 'en' ? 'en' : 'fr') as SeoLang;
 
-  // Strip query strings from canonical for cleanliness, but keep path
-  const cleanPath = location.pathname.replace(/\/+$/, '') || '/';
-  const fullUrl = `${SITE_URL}${cleanPath}`;
+  const pathForCanonical = canonicalPath ?? (location.pathname.replace(/\/+$/, '') || '/');
+  const fullUrl = pathForCanonical.startsWith('http')
+    ? pathForCanonical
+    : `${SITE_URL}${pathForCanonical.startsWith('/') ? pathForCanonical : `/${pathForCanonical}`}`;
 
-  const defaultTitle = 'Arecima — Soins de Luxe Tunisiens | Luxury Skincare';
-  const defaultDescription =
-    'Arecima, marque tunisienne de soins de luxe. Sérums, crèmes et huiles premium aux ingrédients naturels. Livraison gratuite dès 150 TND.';
-
-  const pageTitle = title ? `${title} | Arecima` : defaultTitle;
-  const pageDescription = description || defaultDescription;
-  const pageImage = image || DEFAULT_OG_IMAGE;
+  const pageTitle = formatPageTitle(title, lang);
+  const pageDescription = description || getDefaultSeoDescription(lang);
+  const pageKeywords = keywords || getSeoKeywords(lang);
+  const pageImage = absoluteUrl(image || OG_IMAGE);
   const ogLocale = language === 'ar' ? 'ar_TN' : language === 'en' ? 'en_US' : 'fr_TN';
 
   useEffect(() => {
@@ -46,7 +62,9 @@ const SEOHead = ({ title, description, type = 'website', image, schema, noindex 
     };
 
     const setLink = (rel: string, href: string, hreflang?: string) => {
-      const selector = hreflang ? `link[rel="${rel}"][hreflang="${hreflang}"]` : `link[rel="${rel}"]:not([hreflang])`;
+      const selector = hreflang
+        ? `link[rel="${rel}"][hreflang="${hreflang}"]`
+        : `link[rel="${rel}"]:not([hreflang])`;
       let el = document.querySelector(selector) as HTMLLinkElement | null;
       if (!el) {
         el = document.createElement('link');
@@ -57,11 +75,11 @@ const SEOHead = ({ title, description, type = 'website', image, schema, noindex 
       el.href = href;
     };
 
-    // Core
     setMeta('description', pageDescription);
-    setMeta('robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');
+    setMeta('keywords', pageKeywords);
+    setMeta('robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1');
+    setMeta('googlebot', noindex ? 'noindex, nofollow' : 'index, follow');
 
-    // Open Graph
     setMeta('og:title', pageTitle, 'property');
     setMeta('og:description', pageDescription, 'property');
     setMeta('og:url', fullUrl, 'property');
@@ -69,26 +87,25 @@ const SEOHead = ({ title, description, type = 'website', image, schema, noindex 
     setMeta('og:site_name', 'Arecima', 'property');
     setMeta('og:locale', ogLocale, 'property');
     setMeta('og:image', pageImage, 'property');
-    setMeta('og:image:alt', title || 'Arecima Luxury Skincare', 'property');
+    setMeta('og:image:width', '1200', 'property');
+    setMeta('og:image:height', '630', 'property');
+    setMeta('og:image:alt', title || 'Arecima — Luxury Tunisian Hair Care', 'property');
 
-    // Twitter
     setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:site', '@arecima_tn');
     setMeta('twitter:title', pageTitle);
     setMeta('twitter:description', pageDescription);
     setMeta('twitter:image', pageImage);
 
-    // Canonical & hreflang
     setLink('canonical', fullUrl);
     setLink('alternate', fullUrl, 'fr');
     setLink('alternate', fullUrl, 'en');
     setLink('alternate', fullUrl, 'ar');
     setLink('alternate', fullUrl, 'x-default');
 
-    // Language / direction
     document.documentElement.lang = language === 'ar' ? 'ar' : language === 'fr' ? 'fr' : 'en';
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
 
-    // JSON-LD schemas
     const existingScripts = document.querySelectorAll('script[data-seo-schema]');
     existingScripts.forEach(s => s.remove());
 
@@ -104,10 +121,9 @@ const SEOHead = ({ title, description, type = 'website', image, schema, noindex 
     }
 
     return () => {
-      const scripts = document.querySelectorAll('script[data-seo-schema]');
-      scripts.forEach(s => s.remove());
+      document.querySelectorAll('script[data-seo-schema]').forEach(s => s.remove());
     };
-  }, [pageTitle, pageDescription, fullUrl, type, pageImage, schema, language, ogLocale, noindex]);
+  }, [pageTitle, pageDescription, pageKeywords, fullUrl, type, pageImage, schema, language, ogLocale, noindex, title]);
 
   return null;
 };

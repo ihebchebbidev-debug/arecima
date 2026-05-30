@@ -17,7 +17,7 @@ const Cart = () => {
   if (items.length === 0) {
     return (
       <main className="min-h-screen relative overflow-hidden">
-        <SEOHead title={t('cart.title')} description="Your shopping bag" />
+        <SEOHead title={t('cart.title')} description="Your shopping bag" noindex />
         {/* Soft gold radial backdrop */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-3xl" />
@@ -70,7 +70,7 @@ const Cart = () => {
 
   return (
     <main className="min-h-screen">
-      <SEOHead title={t('cart.title')} description="Your shopping bag — Arecima" />
+      <SEOHead title={t('cart.title')} description="Your shopping bag — Arecima" noindex />
 
       <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
         {/* Header */}

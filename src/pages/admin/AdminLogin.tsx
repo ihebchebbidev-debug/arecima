@@ -4,6 +4,7 @@ import { Lock, Eye, EyeOff } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAdminAuth } from '@/contexts/AdminAuthContext';
+import SEOHead from '@/components/SEOHead';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('Admin');
@@ -33,6 +34,7 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-ivory via-champagne to-background p-4">
+      <SEOHead title="Administration" noindex />
       <div className="w-full max-w-md">
         <div className="rounded-xl border border-border bg-card/95 backdrop-blur p-8 shadow-luxury">
           <div className="text-center mb-8">

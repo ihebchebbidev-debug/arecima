@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useApiBlogPost, useApiBlogPosts } from '@/hooks/useApiProducts';
 import SEOHead from '@/components/SEOHead';
 import { SITE_URL, sitePath } from '@/lib/site';
+import { absoluteUrl } from '@/lib/seo';
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -23,15 +24,17 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center">
+        <SEOHead title="Article not found" noindex />
         <p className="font-body text-muted-foreground">Article not found</p>
-      </div>
+      </main>
     );
   }
 
   const title = post.title[language];
   const description = post.metaDescription?.[language] || post.excerpt[language];
   const url = sitePath(`/blog/${post.id}`);
+  const postImage = absoluteUrl(typeof post.image === 'string' ? post.image : undefined);
 
   // JSON-LD: Article + Breadcrumb + (optional) FAQPage
   const articleSchema = {
@@ -39,7 +42,7 @@ const BlogPost = () => {
     '@type': 'Article',
     headline: title,
     description,
-    image: typeof post.image === 'string' ? post.image : `${SITE_URL}${(post.image as { src?: string }).src || ''}`,
+    image: postImage,
     datePublished: post.date,
     dateModified: post.date,
     author: {
@@ -88,8 +91,9 @@ const BlogPost = () => {
         title={title}
         description={description}
         type="article"
-        image={typeof post.image === 'string' ? post.image : undefined}
+        image={postImage}
         schema={schemas}
+        canonicalPath={`/blog/${post.id}`}
       />
 
       {/* Breadcrumb */}

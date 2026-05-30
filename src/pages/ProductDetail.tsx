@@ -9,7 +9,8 @@ import { useApiProduct, useApiProducts } from '@/hooks/useApiProducts';
 import { resolveImage } from '@/lib/productAdapter';
 import ProductCard from '@/components/ProductCard';
 import SEOHead from '@/components/SEOHead';
-import { SITE_URL, siteProductUrl, sitePath } from '@/lib/site';
+import { siteProductUrl, SITE_URL, sitePath } from '@/lib/site';
+import { absoluteUrl } from '@/lib/seo';
 import { trackViewContent, trackAddToWishlist } from '@/lib/facebookPixel';
 import ProductAttributes from '@/components/product/ProductAttributes';
 import PairItWith from '@/components/product/PairItWith';
@@ -91,7 +92,7 @@ const ProductDetail = () => {
       '@type': 'Product',
       name: product.name.en,
       description: product.description.en,
-      image: resolveImage(product.image),
+      image: absoluteUrl(resolveImage(product.image, product.id)),
       brand: { '@type': 'Brand', name: 'Arecima' },
       sku: product.id,
       offers: {
@@ -133,6 +134,7 @@ const ProductDetail = () => {
         title={product.name[language]}
         description={product.shortDescription[language]}
         type="product"
+        image={absoluteUrl(resolveImage(product.image, product.id))}
         schema={productSchema}
       />
 

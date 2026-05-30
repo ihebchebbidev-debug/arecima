@@ -3,6 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://arecima.tn/</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/" />
@@ -12,77 +13,182 @@
   </url>
   <url>
     <loc>https://arecima.tn/products</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://arecima.tn/products?category=face-care</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arecima.tn/products?category=body-care</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://arecima.tn/products?category=sun-care</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/products" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/products" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/products" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/products" />
   </url>
   <url>
     <loc>https://arecima.tn/products?category=hair-care</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/products?category=hair-care" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/products?category=hair-care" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/products?category=hair-care" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/products?category=hair-care" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/products?category=gift-sets</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/products?category=gift-sets" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/products?category=gift-sets" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/products?category=gift-sets" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/products?category=gift-sets" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/product/soleveil-protect-kpf30</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/product/soleveil-protect-kpf30" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/product/soleveil-protect-kpf30" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/product/soleveil-protect-kpf30" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/product/soleveil-protect-kpf30" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/product/silk-shield-spray</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/product/silk-shield-spray" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/product/silk-shield-spray" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/product/silk-shield-spray" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/product/silk-shield-spray" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/product/rituel-cheveux-duo</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/product/rituel-cheveux-duo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/product/rituel-cheveux-duo" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/product/rituel-cheveux-duo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/product/rituel-cheveux-duo" />
   </url>
   <url>
     <loc>https://arecima.tn/blog</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog" />
   </url>
-  <url><loc>https://arecima.tn/blog/tunisian-hair-oil-ritual</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/argan-oil-benefits</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/scalp-care-fundamentals</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/frizz-control-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/hair-growth-naturally</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/natural-hair-ingredients</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/curly-hair-care</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/how-to-brush-hair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/hair-mask-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/shampoo-routine</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/summer-hair-protection</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/color-treated-hair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/damaged-hair-repair</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/overnight-hair-care</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/arecima-hair-collection</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/morning-skincare-routine</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/serum-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/tunisian-ingredients</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/home-spa-ritual</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://arecima.tn/blog/sun-protection-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url>
+    <loc>https://arecima.tn/blog/soleveil-protect-kpf30-explained</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/soleveil-protect-kpf30-explained" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/soleveil-protect-kpf30-explained" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/soleveil-protect-kpf30-explained" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/soleveil-protect-kpf30-explained" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/blog/silk-shield-anti-humidity-spray</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/silk-shield-anti-humidity-spray" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/silk-shield-anti-humidity-spray" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/silk-shield-anti-humidity-spray" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/silk-shield-anti-humidity-spray" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/blog/arecima-hair-ritual-duo</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/arecima-hair-ritual-duo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/arecima-hair-ritual-duo" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/arecima-hair-ritual-duo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/arecima-hair-ritual-duo" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/blog/summer-hair-beach-pool-protection</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/summer-hair-beach-pool-protection" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/summer-hair-beach-pool-protection" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/summer-hair-beach-pool-protection" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/summer-hair-beach-pool-protection" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/blog/heat-styling-up-to-230</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/heat-styling-up-to-230" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/heat-styling-up-to-230" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/heat-styling-up-to-230" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/heat-styling-up-to-230" />
+  </url>
+  <url>
+    <loc>https://arecima.tn/blog/mediterranean-humidity-frizz</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/blog/mediterranean-humidity-frizz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/blog/mediterranean-humidity-frizz" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/blog/mediterranean-humidity-frizz" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/blog/mediterranean-humidity-frizz" />
+  </url>
   <url>
     <loc>https://arecima.tn/faq</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/faq" />
   </url>
   <url>
     <loc>https://arecima.tn/shipping-policy</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/shipping-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/shipping-policy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/shipping-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/shipping-policy" />
   </url>
   <url>
     <loc>https://arecima.tn/return-policy</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/return-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/return-policy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/return-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/return-policy" />
   </url>
   <url>
     <loc>https://arecima.tn/privacy-policy</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/privacy-policy" />
   </url>
   <url>
     <loc>https://arecima.tn/terms</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://arecima.tn/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://arecima.tn/terms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://arecima.tn/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://arecima.tn/terms" />
   </url>
 </urlset>

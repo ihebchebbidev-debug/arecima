@@ -52,7 +52,7 @@ const Terms = () => {
 
   return (
     <main className="min-h-screen pt-28 pb-16">
-      <SEOHead title={c.title} description="Arecima terms and conditions for purchasing luxury skincare products." />
+      <SEOHead title={c.title} description="Arecima terms and conditions for purchasing luxury hair care products." />
       <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
         <h1 className="font-display text-3xl lg:text-4xl text-center mb-3">{c.title}</h1>
         <p className="font-body text-xs text-muted-foreground text-center mb-12">{c.lastUpdated}</p>

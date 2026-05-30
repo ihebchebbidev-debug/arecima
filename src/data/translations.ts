@@ -20,7 +20,7 @@ export const translations: Record<Language, Record<string, string>> = {
     // Hero
     'hero.subtitle': 'LUXURY SKINCARE',
     'hero.title': 'Reveal Your Natural Radiance',
-    'hero.description': 'Discover our exclusive collection of premium skincare crafted with the finest natural ingredients from Tunisia.',
+    'hero.description': 'Discover Soleveil Protect KPF 30 & Silk Shield — premium Tunisian hair care for UV, heat, sea and humidity protection.',
     'hero.cta': 'Shop Now',
     'hero.secondary': 'Discover Collection',
 
@@ -146,7 +146,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'blog.title': 'Beauty Tips & Conseils',
     'blog.subtitle': 'THE ARECIMA JOURNAL',
     'blog.homeTitle': 'Beauty Tips & Advice',
-    'blog.description': 'Expert skincare advice, beauty rituals, and the latest from the world of luxury skincare.',
+    'blog.description': 'Expert hair care advice, Arecima rituals, and guides for Soleveil Protect & Silk Shield.',
     'blog.featured': 'FEATURED',
     'blog.minRead': 'min read',
     'blog.viewAll': 'View All Articles',
@@ -296,7 +296,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
     'hero.subtitle': 'SOINS DE LUXE',
     'hero.title': 'Révélez Votre Éclat Naturel',
-    'hero.description': 'Découvrez notre collection exclusive de soins premium élaborés avec les plus fins ingrédients naturels de Tunisie.',
+    'hero.description': 'Découvrez Soleveil Protect KPF 30 & Silk Shield — soins capillaires premium tunisiens contre UV, chaleur, mer et humidité.',
     'hero.cta': 'Acheter',
     'hero.secondary': 'Découvrir la Collection',
 
@@ -412,7 +412,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'blog.title': 'Conseils Beauté',
     'blog.subtitle': 'LE JOURNAL ARECIMA',
     'blog.homeTitle': 'Conseils & Astuces Beauté',
-    'blog.description': 'Conseils d\'experts en soins de la peau, rituels beauté et les dernières nouvelles du monde de la beauté de luxe.',
+    'blog.description': 'Conseils capillaires d\'experts, rituels Arecima et guides Soleveil Protect & Silk Shield.',
     'blog.featured': 'À LA UNE',
     'blog.minRead': 'min de lecture',
     'blog.viewAll': 'Voir Tous les Articles',
@@ -547,7 +547,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
     'hero.subtitle': 'العناية الفاخرة بالبشرة',
     'hero.title': 'أظهري إشراقتك الطبيعية',
-    'hero.description': 'اكتشفي مجموعتنا الحصرية من منتجات العناية الفاخرة المصنوعة من أجود المكونات الطبيعية التونسية.',
+    'hero.description': 'اكتشفي سولفيل بروتكت KPF 30 وسيلك شيلد — عناية شعر فاخرة تونسية للحماية من UV والحرارة والبحر والرطوبة.',
     'hero.cta': 'تسوقي الآن',
     'hero.secondary': 'اكتشفي المجموعة',
 
@@ -663,7 +663,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'blog.title': 'نصائح الجمال',
     'blog.subtitle': 'مجلة أريسيما',
     'blog.homeTitle': 'نصائح وإرشادات الجمال',
-    'blog.description': 'نصائح خبراء العناية بالبشرة وطقوس الجمال وآخر أخبار عالم العناية الفاخرة.',
+    'blog.description': 'نصائح خبراء العناية بالشعر وطقوس أريسيما ودلائل سولفيل بروتكت وسيلك شيلد.',
     'blog.featured': 'مميز',
     'blog.minRead': 'دقائق قراءة',
     'blog.viewAll': 'عرض كل المقالات',

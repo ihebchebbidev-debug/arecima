@@ -62,7 +62,7 @@ const FAQ = () => {
 
   return (
     <main className="min-h-screen pt-28 pb-16">
-      <SEOHead title={c.title} description="Find answers to common questions about Arecima skincare products, shipping, returns, and more." schema={schema} />
+      <SEOHead title={c.title} description="Answers about Arecima hair care products, shipping, returns, and orders." schema={schema} />
       <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
         <h1 className="font-display text-3xl lg:text-4xl text-center mb-12">{c.title}</h1>
         <div className="space-y-3">

@@ -131,7 +131,7 @@ const Checkout = () => {
   if (items.length === 0) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20">
-        <SEOHead title={t('checkout.title')} description="Secure checkout — Arecima" />
+        <SEOHead title={t('checkout.title')} description="Secure checkout — Arecima" noindex />
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-gold/10 blur-2xl rounded-full" />
           <div className="relative w-24 h-24 rounded-full bg-champagne flex items-center justify-center border border-gold/20">
@@ -164,7 +164,7 @@ const Checkout = () => {
 
   return (
     <main className="min-h-screen">
-      <SEOHead title={t('checkout.title')} description="Secure checkout — Arecima luxury skincare" />
+      <SEOHead title={t('checkout.title')} description="Secure checkout — Arecima hair care" noindex />
 
       <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
         <h1 className="font-display text-3xl lg:text-4xl mb-3 text-center">{t('checkout.title')}</h1>

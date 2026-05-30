@@ -7,6 +7,7 @@ import { useApiProducts, useApiCategories } from '@/hooks/useApiProducts';
 import ProductCard from '@/components/ProductCard';
 import SEOHead from '@/components/SEOHead';
 import { sitePath } from '@/lib/site';
+import { getDefaultSeoDescription, type SeoLang } from '@/lib/seo';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 type SortKey = 'featured' | 'price-low' | 'price-high' | 'rating' | 'new';
@@ -42,14 +43,23 @@ const Products = () => {
     ? t('products.all')
     : categories.find(c => c.id === activeCategory)?.name[language] || '';
 
+  const lang = (language === 'ar' ? 'ar' : language === 'en' ? 'en' : 'fr') as SeoLang;
+  const productsSeoDescription = lang === 'fr'
+    ? 'Découvrez Soleveil Protect KPF 30, Silk Shield et le Duo Rituel Cheveux — soins capillaires premium made in Tunisia.'
+    : lang === 'ar'
+      ? 'اكتشفي سولفيل بروتكت، سيلك شيلد وثنائي طقس الشعر — عناية capillaire فاخرة من تونس.'
+      : 'Shop Soleveil Protect KPF 30, Silk Shield & the Hair Ritual Duo — premium Tunisian hair care.';
+
   const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `Arecima — ${activeCatName}`,
-    description: t('hero.description'),
+    description: productsSeoDescription,
     url: sitePath(`/products${activeCategory !== 'all' ? `?category=${activeCategory}` : ''}`),
     numberOfItems: filteredProducts.length,
   };
+
+  const canonicalPath = `/products${activeCategory !== 'all' ? `?category=${activeCategory}` : ''}`;
 
   const sortLabels: Record<SortKey, string> = {
     featured: language === 'fr' ? 'En vedette' : language === 'ar' ? 'مميزة' : 'Featured',
@@ -163,8 +173,9 @@ const Products = () => {
     <main className="min-h-screen">
       <SEOHead
         title={language === 'fr' ? `${activeCatName} — Notre Collection` : language === 'ar' ? `${activeCatName} — مجموعتنا` : `${activeCatName} — Our Collection`}
-        description={language === 'fr' ? 'Découvrez notre collection premium de soins de luxe tunisiens.' : language === 'ar' ? 'اكتشفي مجموعتنا الفاخرة من منتجات العناية التونسية.' : 'Discover our premium collection of luxury Tunisian skincare.'}
+        description={activeCategory === 'all' ? getDefaultSeoDescription(lang) : productsSeoDescription}
         schema={collectionSchema}
+        canonicalPath={canonicalPath}
       />
 
       {/* Page Header */}

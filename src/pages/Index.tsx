@@ -11,7 +11,16 @@ import SkinConcerns from '@/components/home/SkinConcerns';
 import UGCGrid from '@/components/home/UGCGrid';
 import NewsletterCapture from '@/components/home/NewsletterCapture';
 import { Skeleton } from '@/components/ui/skeleton';
-import { SITE_URL, siteProductUrl } from '@/lib/site';
+import { SITE_URL, sitePath } from '@/lib/site';
+import { absoluteUrl } from '@/lib/seo';
+import {
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+  buildItemListSchema,
+  buildProductOfferCatalog,
+  getDefaultSeoTitle,
+  type SeoLang,
+} from '@/lib/seo';
 import heroBanner from '@/assets/hero-banner.jpg';
 import heroBannerMobile from '@/assets/hero-banner-mobile.jpg';
 import routineSection from '@/assets/routine-section.jpg';
@@ -54,18 +63,11 @@ const Index = () => {
     { key: 'pricklypear', Icon: Droplets },
   ];
 
+  const lang = (language === 'ar' ? 'ar' : language === 'en' ? 'en' : 'fr') as SeoLang;
+
   const homeSchema = [
-    {
-      '@context': 'https://schema.org', '@type': 'WebSite', name: 'Arecima', url: SITE_URL,
-      potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/products?q={search_term_string}`, 'query-input': 'required name=search_term_string' }
-    },
-    {
-      '@context': 'https://schema.org', '@type': 'Organization', name: 'Arecima', url: SITE_URL,
-      logo: `${SITE_URL}/logo.png`,
-      sameAs: ['https://instagram.com/arecima.tn', 'https://facebook.com/arecima.tn', 'https://tiktok.com/@arecima.tn'],
-      contactPoint: { '@type': 'ContactPoint', telephone: '+216-50-454-000', contactType: 'customer service', availableLanguage: ['French', 'English', 'Arabic'] },
-      address: { '@type': 'PostalAddress', addressLocality: 'Tunis', addressCountry: 'TN' }
-    },
+    buildWebSiteSchema(),
+    buildOrganizationSchema(),
     {
       '@context': 'https://schema.org', '@type': 'Store', name: 'Arecima', image: `${SITE_URL}/og-image.jpg`,
       url: SITE_URL, telephone: '+216-50-454-000', priceRange: 'TND',
@@ -78,14 +80,8 @@ const Index = () => {
         { '@type': 'ListItem', position: 2, name: 'Produits', item: `${SITE_URL}/products` },
       ],
     },
-    ...(bestSellers.length ? [{
-      '@context': 'https://schema.org', '@type': 'ItemList', name: 'Best Sellers',
-      itemListElement: bestSellers.map((p, i) => ({
-        '@type': 'ListItem', position: i + 1,
-        url: siteProductUrl(p.id),
-        name: p.name[language] || p.name.fr,
-      })),
-    }] : []),
+    ...(bestSellers.length ? [buildItemListSchema('Best Sellers — Arecima', bestSellers, lang)] : []),
+    ...(products.length ? [buildProductOfferCatalog(products)] : []),
   ];
 
   const showApiReviews = !reviewsLoading && apiReviews.length > 0;
@@ -93,7 +89,7 @@ const Index = () => {
   return (
     <main>
       <SEOHead
-        title={language === 'fr' ? 'Soins de Luxe Tunisiens' : language === 'ar' ? 'العناية الفاخرة التونسية' : 'Luxury Tunisian Skincare'}
+        title={getDefaultSeoTitle(lang)}
         description={t('hero.description')}
         schema={homeSchema}
       />
@@ -104,7 +100,7 @@ const Index = () => {
           <picture>
             <source media="(max-width: 1023px)" srcSet={heroBannerMobile} />
             <source media="(min-width: 1024px)" srcSet={heroBanner} />
-            <img src={heroBanner} alt="Arecima Luxury Skincare — Premium Tunisian beauty products" className="absolute inset-0 w-full h-full object-cover scale-110" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" />
+            <img src={heroBanner} alt="Arecima — Soleveil Protect & Silk Shield hair care ritual" className="absolute inset-0 w-full h-full object-cover scale-110" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" />
           </picture>
         </motion.div>
         <div className="absolute inset-0 lg:hidden" style={{ background: 'linear-gradient(180deg, rgba(12,10,8,0.85) 0%, rgba(12,10,8,0.6) 50%, rgba(12,10,8,0.45) 100%)' }} />

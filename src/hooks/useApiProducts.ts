@@ -4,6 +4,7 @@ import { adaptProduct, adaptBlogPost } from '@/lib/productAdapter';
 import { mergeStorefrontProducts, getStorefrontProductBySlug } from '@/lib/storefrontCatalog';
 import type { Product } from '@/data/products';
 import type { BlogPost } from '@/data/blogPosts';
+import { blogPosts as staticBlogPosts } from '@/data/blogPosts';
 
 export interface StoreCategory {
   id: string;
@@ -108,8 +109,10 @@ export function useApiBlogPosts() {
     let cancelled = false;
     api.listPosts({ limit: 50, is_published: 1 }).then(res => {
       if (cancelled) return;
-      if (res.success && Array.isArray(res.data)) {
+      if (res.success && Array.isArray(res.data) && res.data.length > 0) {
         setData(res.data.map(adaptBlogPost));
+      } else {
+        setData(staticBlogPosts);
       }
       setLoading(false);
     });
@@ -132,7 +135,7 @@ export function useApiBlogPost(slug?: string) {
       if (res.success && res.data) {
         setPost(adaptBlogPost(res.data));
       } else {
-        setPost(null);
+        setPost(staticBlogPosts.find(p => p.id === slug) ?? null);
       }
       setLoading(false);
     });

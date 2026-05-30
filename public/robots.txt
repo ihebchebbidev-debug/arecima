@@ -5,27 +5,30 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /checkout
 Disallow: /cart
+Disallow: /favorites
 Disallow: /api/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Disallow: /checkout
+Disallow: /cart
+Disallow: /favorites
 
 User-agent: Bingbot
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Disallow: /checkout
+Disallow: /cart
+Disallow: /favorites
 
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
-
-# Disallow noisy AI crawlers if you don't want them training on your content (optional)
-# User-agent: GPTBot
-# Disallow: /
 
 Sitemap: https://arecima.tn/sitemap.xml
 Host: https://arecima.tn
